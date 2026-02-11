@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <defs>
+    <linearGradient id="fire" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF0000"/>
+      <stop offset="100%" stop-color="#FF4500"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="180" height="180" rx="36" fill="url(#fire)"/>
+  <text x="90" y="102" text-anchor="middle" dominant-baseline="central"
+        font-family="Impact,'Arial Black',sans-serif" font-weight="900"
+        font-style="italic" font-size="62" fill="#FFFFFF" filter="url(#glow)">26.2</text>
+</svg>
