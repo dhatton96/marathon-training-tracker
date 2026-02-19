@@ -57,6 +57,7 @@ header{text-align:center;margin-bottom:36px}
 header h1{font-size:22px;font-weight:700;letter-spacing:0.5px;color:var(--text)}
 header .accent{color:var(--accent)}
 header .subtitle{color:var(--text-dim);font-size:13px;font-weight:400;letter-spacing:0.3px;margin-top:6px}
+header .last-synced{color:var(--text-dim);font-size:11px;font-weight:400;letter-spacing:0.2px;margin-top:4px;opacity:0.7}
 
 /* Progress */
 .progress-section{margin-bottom:32px}
@@ -309,6 +310,13 @@ function loadStatus(){
     .then(r=>r.ok?r.json():null)
     .then(data=>{if(data){trainingStatus=data;renderStatusBadge()}})
     .catch(()=>{});
+  fetch('last_synced.txt?v='+Date.now())
+    .then(r=>r.ok?r.text():null)
+    .then(txt=>{
+      const el=document.getElementById('last-synced');
+      if(el&&txt)el.textContent='Last synced: '+txt.trim();
+    })
+    .catch(()=>{});
 }
 function renderStatusBadge(){
   const el=document.getElementById('status-badge');
@@ -388,6 +396,7 @@ function render(){
 <header>
   <h1>Journey to <span class="accent">Sub 2:35</span></h1>
   <div class="subtitle">Blackpool Marathon</div>
+  <div class="last-synced" id="last-synced"></div>
 </header>
 
 <div id="status-badge" class="status-card on-track">

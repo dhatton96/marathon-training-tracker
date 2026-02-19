@@ -8,13 +8,17 @@ sync_strava.py  (v2)
 5. Analyse aerobic efficiency week-over-week
 6. Predict marathon time (Riegel from HM PB + AE adjustment)
 7. Write training_status.json for the website Live Status badge
+8. Write last_synced.txt with current timestamp
+9. Git add / commit / push updated data files
 
 Run:  python sync_strava.py
 """
 
-import csv, json, os, sys, io, urllib.request, urllib.parse
+import csv, json, os, sys, io, urllib.request, urllib.parse, subprocess
 from datetime import datetime, timezone, timedelta, date
 from collections import defaultdict
+
+REPO_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # -- Constants ----------------------------------------------------------------
 PLAN_START     = date(2025, 12, 22)   # Mon 22 Dec 2025 = Week 1
@@ -429,6 +433,40 @@ def main():
 
     # Print Week 9 audit to console
     week9_audit(master, analysis)
+
+    # Write timestamp file
+    now_str = datetime.now().strftime("%d %b %Y at %H:%M")
+    with open("last_synced.txt", "w", encoding="utf-8") as f:
+        f.write(now_str)
+    print(f"\n  Last synced: {now_str}")
+
+    # Git push updated data files
+    git_push(now_str)
+
+# ── Git auto-push ─────────────────────────────────────────────────────────────
+def git_push(timestamp):
+    files = ["training_status.json", "master_activities.csv", "last_synced.txt"]
+    try:
+        subprocess.run(
+            ["git", "add"] + files,
+            cwd=REPO_DIR, check=True, capture_output=True, timeout=30
+        )
+        result = subprocess.run(
+            ["git", "commit", "-m", f"Auto-sync {timestamp}"],
+            cwd=REPO_DIR, capture_output=True, timeout=30
+        )
+        if result.returncode != 0:
+            print("  Git: nothing new to commit")
+            return
+        subprocess.run(
+            ["git", "push", "origin", "master"],
+            cwd=REPO_DIR, check=True, capture_output=True, timeout=60
+        )
+        print("  Git push complete")
+    except subprocess.TimeoutExpired:
+        print("  Git push timed out")
+    except Exception as e:
+        print(f"  Git push failed: {e}")
 
 if __name__ == "__main__":
     main()
