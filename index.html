@@ -217,6 +217,18 @@ header .subtitle{color:var(--text-dim);font-size:13px;font-weight:400;letter-spa
 
 /* Monospace utility */
 .mono{font-family:'Space Mono','Courier New',monospace}
+
+/* Current Week Badge */
+.current-badge{
+  font-family:'Space Mono','Courier New',monospace;font-size:9px;font-weight:700;
+  letter-spacing:0.5px;background:var(--accent);color:#fff;
+  padding:2px 6px;border-radius:4px;margin-left:8px;vertical-align:middle;
+  text-transform:uppercase;display:inline-block;
+}
+.week-nav.is-current{
+  background:var(--accent-light);border:1px solid rgba(201,100,66,0.2);
+  border-radius:14px;padding:12px 14px;margin-left:-14px;margin-right:-14px;
+}
 </style>
 </head>
 <body>
@@ -254,8 +266,17 @@ const DAYS=['mon','tue','wed','thu','fri','sat','sun'];
 const DAY_LABELS={mon:'Monday',tue:'Tuesday',wed:'Wednesday',thu:'Thursday',fri:'Friday',sat:'Saturday',sun:'Sunday'};
 const STORAGE_KEY='marathon-tracker-v1';
 
+// ─── Current Week Detection ────────────────────────────────────────────
+// Week 1 began Mon 22 Dec 2025 — anchor for all date maths
+const PLAN_START=new Date(2025,11,22);
+function getCurrentPlanWeek(){
+  const now=new Date();now.setHours(0,0,0,0);
+  const days=Math.floor((now-PLAN_START)/864e5);
+  return Math.max(1,Math.min(18,Math.floor(days/7)+1));
+}
+
 // ─── State ────────────────────────────────────────────────────────────
-let state, currentWeek=8;
+let state, currentWeek;
 
 function loadState(){
   const saved=localStorage.getItem(STORAGE_KEY);
@@ -303,6 +324,7 @@ function escHtml(s){const d=document.createElement('div');d.textContent=s;return
 
 // ─── Render ───────────────────────────────────────────────────────────
 function render(){
+  const isCurrentWeek=currentWeek===getCurrentPlanWeek();
   const pct=calcProgress();
   const week=PLAN[currentWeek-1];
   const ws=weekStats(currentWeek);
@@ -336,9 +358,9 @@ function render(){
   ${PACES.map(p=>`<div class="pace-pill"><strong>${p.abbr}</strong>${p.pace}</div>`).join('')}
 </div>
 
-<div class="week-nav">
+<div class="week-nav${isCurrentWeek?' is-current':''}" id="week-nav">
   <button class="nav-btn" onclick="navWeek(-1)" ${currentWeek===1?'disabled':''}>&#9664;</button>
-  <h2>Week ${week.w} &middot; ${week.km} km<span class="phase">${week.phase}</span></h2>
+  <h2>Week ${week.w} &middot; ${week.km} km${isCurrentWeek?'<span class="current-badge">CURRENT</span>':''}<span class="phase">${week.phase}</span></h2>
   <button class="nav-btn" onclick="navWeek(1)" ${currentWeek===18?'disabled':''}>&#9654;</button>
 </div>
 
@@ -471,7 +493,14 @@ document.addEventListener('touchend',e=>{
 },{passive:true});
 
 // ─── Init ─────────────────────────────────────────────────────────────
-loadState();render();
+loadState();
+currentWeek=getCurrentPlanWeek();
+render();
+// Auto-scroll to current week on load (works on desktop and as a home screen PWA)
+setTimeout(()=>{
+  const el=document.getElementById('week-nav');
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+},120);
 </script>
 </body>
 </html>
