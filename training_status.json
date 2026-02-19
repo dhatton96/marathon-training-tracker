@@ -1,0 +1,18 @@
+{
+  "label": "ON TRACK FOR 2:33:20",
+  "status": "ON TRACK",
+  "predicted_time": "2:33:20",
+  "predicted_seconds": 9200,
+  "target_seconds": 9300,
+  "delta_seconds": 100,
+  "ae_trend": "declining",
+  "ae_trend_pct": -4.5,
+  "ae_delta_wk": 2.4,
+  "ae_label": "AE +2.4% vs last week",
+  "hr_at_mp": 154.4,
+  "hr_buffer": 4.1,
+  "red_zone_hr": 158.5,
+  "current_week": 9,
+  "week9_km": 57.9,
+  "last_updated": "2026-02-19"
+}

@@ -194,6 +194,33 @@ header .subtitle{color:var(--text-dim);font-size:13px;font-weight:400;letter-spa
   .pace-pill{font-size:9px;padding:3px 7px}
   .stat-card .stat-val{font-size:18px}
 }
+/* Live Status Badge */
+.status-card{
+  background:var(--accent);border-radius:16px;padding:18px 22px;
+  margin-bottom:20px;color:#fff;position:relative;overflow:hidden;
+}
+.status-card::before{
+  content:'';position:absolute;top:-20px;right:-20px;width:100px;height:100px;
+  background:rgba(255,255,255,0.06);border-radius:50%;
+}
+.status-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.8px;
+  text-transform:uppercase;opacity:0.75;margin-bottom:6px}
+.status-headline{
+  font-family:'Space Mono','Courier New',monospace;font-size:18px;
+  font-weight:700;letter-spacing:0.3px;line-height:1.2;margin-bottom:10px;
+}
+.status-pills{display:flex;flex-wrap:wrap;gap:6px}
+.status-pill{
+  font-size:10px;font-weight:600;letter-spacing:0.3px;
+  background:rgba(255,255,255,0.18);border-radius:20px;padding:3px 9px;
+  white-space:nowrap;
+}
+.status-card.ahead{background:linear-gradient(135deg,#3a7d44,#2d6035)}
+.status-card.on-track{background:var(--accent)}
+.status-card.close{background:linear-gradient(135deg,#b07d2a,#8a6020)}
+.status-card.off-pace{background:linear-gradient(135deg,#7d3a3a,#602d2d)}
+.status-updated{font-size:10px;opacity:0.55;margin-top:8px}
+
 /* Countdown */
 .countdown-card{
   display:flex;align-items:center;justify-content:center;gap:10px;
@@ -275,6 +302,31 @@ function getCurrentPlanWeek(){
   return Math.max(1,Math.min(18,Math.floor(days/7)+1));
 }
 
+// ─── Live Status ──────────────────────────────────────────────────────
+let trainingStatus = null;
+function loadStatus(){
+  fetch('training_status.json?v='+Date.now())
+    .then(r=>r.ok?r.json():null)
+    .then(data=>{if(data){trainingStatus=data;renderStatusBadge()}})
+    .catch(()=>{});
+}
+function renderStatusBadge(){
+  const el=document.getElementById('status-badge');
+  if(!el||!trainingStatus)return;
+  const s=trainingStatus;
+  const cls=s.status==='AHEAD'?'ahead':s.status==='ON TRACK'?'on-track':s.status==='CLOSE'?'close':'off-pace';
+  const pills=[];
+  if(s.ae_label)pills.push(s.ae_label);
+  if(s.hr_buffer!=null)pills.push(`${s.hr_buffer>0?'+':''}${s.hr_buffer.toFixed(0)}bpm HR buffer at MP`);
+  if(s.hr_at_mp)pills.push(`MP heart rate ~${Math.round(s.hr_at_mp)}bpm`);
+  el.className=`status-card ${cls}`;
+  el.innerHTML=`
+    <div class="status-eyebrow">Live Training Status &middot; Wk ${s.current_week||'?'}</div>
+    <div class="status-headline">${s.label||'Calculating...'}</div>
+    <div class="status-pills">${pills.map(p=>`<span class="status-pill">${p}</span>`).join('')}</div>
+    <div class="status-updated">Updated ${s.last_updated||'—'} &middot; based on 1:13 HM PB + AE trend</div>`;
+}
+
 // ─── State ────────────────────────────────────────────────────────────
 let state, currentWeek;
 
@@ -337,6 +389,11 @@ function render(){
   <h1>Journey to <span class="accent">Sub 2:35</span></h1>
   <div class="subtitle">Blackpool Marathon</div>
 </header>
+
+<div id="status-badge" class="status-card on-track">
+  <div class="status-eyebrow">Live Training Status</div>
+  <div class="status-headline">Loading...</div>
+</div>
 
 <div class="countdown-card">
   <span class="countdown-label">Race Day</span>
@@ -496,6 +553,7 @@ document.addEventListener('touchend',e=>{
 loadState();
 currentWeek=getCurrentPlanWeek();
 render();
+loadStatus();
 // Auto-scroll to current week on load (works on desktop and as a home screen PWA)
 setTimeout(()=>{
   const el=document.getElementById('week-nav');
