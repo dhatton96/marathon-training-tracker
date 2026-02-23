@@ -6,13 +6,13 @@
   "target_seconds": 9300,
   "delta_seconds": 78,
   "ae_trend": "declining",
-  "ae_trend_pct": -6.5,
-  "ae_delta_wk": -1.8,
-  "ae_label": "AE -1.8% vs last week",
-  "hr_at_mp": 153.1,
-  "hr_buffer": 5.4,
+  "ae_trend_pct": -6.2,
+  "ae_delta_wk": 1.9,
+  "ae_label": "AE +1.9% vs last week",
+  "hr_at_mp": 153.7,
+  "hr_buffer": 4.8,
   "red_zone_hr": 158.5,
-  "current_week": 9,
+  "current_week": 10,
   "week9_km": 104.8,
-  "last_updated": "2026-02-22"
+  "last_updated": "2026-02-23"
 }
