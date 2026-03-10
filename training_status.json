@@ -1,18 +1,18 @@
 {
-  "label": "AHEAD OF TARGET \u2014 ON FOR 2:29:22",
+  "label": "AHEAD OF TARGET \u2014 ON FOR 2:29:12",
   "status": "AHEAD",
-  "predicted_time": "2:29:22",
-  "predicted_seconds": 8962,
+  "predicted_time": "2:29:12",
+  "predicted_seconds": 8952,
   "target_seconds": 9300,
-  "delta_seconds": 338,
+  "delta_seconds": 348,
   "ae_trend": "declining",
-  "ae_trend_pct": -4.3,
-  "ae_delta_wk": -7.6,
-  "ae_label": "AE -7.6% vs last week",
-  "hr_at_mp": 159.4,
-  "hr_buffer": 18.3,
+  "ae_trend_pct": -3.9,
+  "ae_delta_wk": -5.7,
+  "ae_label": "AE -5.7% vs last week",
+  "hr_at_mp": 159.5,
+  "hr_buffer": 18.2,
   "red_zone_hr": 177.7,
   "current_week": 12,
   "week9_km": 104.8,
-  "last_updated": "2026-03-09"
+  "last_updated": "2026-03-10"
 }
