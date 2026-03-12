@@ -1,5 +1,5 @@
 {
-  "label": "AHEAD OF TARGET \u2014 ON FOR 2:29:12",
+  "label": "AHEAD OF TARGET -- ON FOR 2:29:12",
   "status": "AHEAD",
   "predicted_time": "2:29:12",
   "predicted_seconds": 8952,
@@ -14,5 +14,18 @@
   "red_zone_hr": 177.7,
   "current_week": 12,
   "week9_km": 104.8,
-  "last_updated": "2026-03-11"
+  "last_updated": "2026-03-12",
+  "ctl": 32.5,
+  "atl": 41.1,
+  "tsb": -8.6,
+  "form": "building",
+  "vdot": 66.7,
+  "vdot_from": "2026-02-11",
+  "zone_pct": {
+    "z1": 18,
+    "z2": 49,
+    "z3": 24,
+    "z4": 5,
+    "z5": 4
+  }
 }
