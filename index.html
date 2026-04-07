@@ -195,32 +195,29 @@ header .last-synced{color:var(--text-dim);font-size:11px;font-weight:400;letter-
   .pace-pill{font-size:9px;padding:3px 7px}
   .stat-card .stat-val{font-size:18px}
 }
-/* Live Status Badge */
+/* Live Status — subtle footer strip */
 .status-card{
-  background:var(--accent);border-radius:16px;padding:18px 22px;
-  margin-bottom:20px;color:#fff;position:relative;overflow:hidden;
+  border-top:1px solid var(--border);
+  margin-top:32px;padding-top:20px;padding-bottom:4px;
 }
-.status-card::before{
-  content:'';position:absolute;top:-20px;right:-20px;width:100px;height:100px;
-  background:rgba(255,255,255,0.06);border-radius:50%;
+.status-eyebrow{
+  font-size:10px;font-weight:600;letter-spacing:0.7px;
+  text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;
 }
-.status-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.8px;
-  text-transform:uppercase;opacity:0.75;margin-bottom:6px}
 .status-headline{
-  font-family:'Space Mono','Courier New',monospace;font-size:18px;
-  font-weight:700;letter-spacing:0.3px;line-height:1.2;margin-bottom:10px;
+  font-family:'Space Mono','Courier New',monospace;font-size:13px;
+  font-weight:700;color:var(--text);letter-spacing:0.2px;margin-bottom:8px;
 }
-.status-pills{display:flex;flex-wrap:wrap;gap:6px}
+.status-card.ahead .status-headline{color:#3a7d44}
+.status-card.close .status-headline{color:#b07d2a}
+.status-card.off-pace .status-headline{color:#7d3a3a}
+.status-pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
 .status-pill{
-  font-size:10px;font-weight:600;letter-spacing:0.3px;
-  background:rgba(255,255,255,0.18);border-radius:20px;padding:3px 9px;
-  white-space:nowrap;
+  font-size:10px;font-weight:500;letter-spacing:0.2px;color:var(--text-dim);
+  background:var(--card-bg);border:1px solid var(--border-light);
+  border-radius:20px;padding:3px 9px;white-space:nowrap;
 }
-.status-card.ahead{background:linear-gradient(135deg,#3a7d44,#2d6035)}
-.status-card.on-track{background:var(--accent)}
-.status-card.close{background:linear-gradient(135deg,#b07d2a,#8a6020)}
-.status-card.off-pace{background:linear-gradient(135deg,#7d3a3a,#602d2d)}
-.status-updated{font-size:10px;opacity:0.55;margin-top:8px}
+.status-updated{font-size:10px;color:var(--text-dim);opacity:0.6}
 
 /* Countdown */
 .countdown-card{
@@ -257,10 +254,84 @@ header .last-synced{color:var(--text-dim);font-size:11px;font-weight:400;letter-
   background:var(--accent-light);border:1px solid rgba(201,100,66,0.2);
   border-radius:14px;padding:12px 14px;margin-left:-14px;margin-right:-14px;
 }
+
+/* ── Fuel & Shop ─────────────────────────────────────────── */
+#fuel-module{max-width:640px;margin:0 auto;padding:0 20px 40px;padding-left:calc(20px + var(--safe-left));padding-right:calc(20px + var(--safe-right))}
+.fuel-toggle{width:100%;display:flex;justify-content:space-between;align-items:center;background:var(--card-bg);border:0.5px solid rgba(29,28,22,0.2);border-radius:14px;padding:16px 18px;font-family:inherit;font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--text-dim);cursor:pointer;transition:all 0.15s;box-shadow:var(--shadow)}
+.fuel-toggle:active{background:var(--surface-hover)}
+.fuel-toggle-right{display:flex;align-items:center;gap:8px}
+.fuel-progress-badge{font-size:10px;font-weight:700;background:var(--accent);color:#fff;border-radius:10px;padding:2px 8px;letter-spacing:0.3px}
+.fuel-icon{font-size:15px;transition:transform 0.2s;display:inline-block;opacity:0.6}
+.fuel-module-open .fuel-icon{transform:rotate(180deg)}
+.fuel-content{padding-top:12px}
+.fuel-est-card{background:var(--card-bg);border:0.5px solid rgba(29,28,22,0.2);border-radius:14px;padding:18px;margin-bottom:10px;box-shadow:var(--shadow)}
+.fuel-est-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+.fuel-est-title{font-size:12px;font-weight:600;letter-spacing:0.3px;color:var(--text-dim)}
+.fuel-est-km{font-size:12px;color:var(--accent);font-weight:700;font-family:'Space Mono','Courier New',monospace}
+.fuel-stats{display:flex;gap:10px;margin-bottom:14px}
+.fuel-stat{flex:1;text-align:center}
+.fuel-stat-val{font-size:18px;font-weight:700;font-family:'Space Mono','Courier New',monospace;color:var(--text)}
+.fuel-stat-label{font-size:9px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--text-dim);margin-top:2px}
+.fuel-weight-row{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border-light);border-radius:10px;padding:8px 14px}
+.fuel-weight-row label{font-size:11px;font-weight:600;letter-spacing:0.3px;text-transform:uppercase;color:var(--text-dim);flex:1}
+.fuel-weight-in{width:58px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:15px;font-family:'Space Mono','Courier New',monospace;color:var(--text);font-weight:700;text-align:center;outline:none;-webkit-appearance:none;appearance:none}
+.fuel-weight-in:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)}
+.fuel-weight-unit{font-size:12px;color:var(--text-dim);font-weight:500}
+.macro-section{background:var(--surface);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.macro-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.macro-row:last-child{margin-bottom:0}
+.macro-name{font-size:10px;font-weight:600;letter-spacing:0.4px;text-transform:uppercase;color:var(--text-dim);width:48px;flex-shrink:0}
+.macro-g{font-size:12px;font-weight:700;font-family:'Space Mono','Courier New',monospace;color:var(--text);width:54px;flex-shrink:0;text-align:right}
+.macro-bar-wrap{flex:1;height:5px;background:var(--border);border-radius:20px;overflow:hidden}
+.macro-bar-fill{height:100%;border-radius:20px;transition:width 0.4s ease}
+.carb-fill{background:#e8a838}
+.protein-fill{background:var(--accent)}
+.fat-fill{background:#7bafd4}
+.macro-per{font-size:9px;color:var(--text-dim);width:26px;flex-shrink:0;letter-spacing:0.2px}
+.high-mi-badge{background:var(--accent-light);border:1px solid rgba(201,100,66,0.2);border-radius:8px;padding:8px 14px;font-size:11px;font-weight:600;color:var(--accent);letter-spacing:0.3px;text-align:center;margin-bottom:10px}
+.shop-section-top{display:flex;justify-content:space-between;align-items:baseline;margin:14px 0 6px}
+.shop-section-hd{font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--text-dim)}
+.shop-prices-toggle{font-size:11px;font-weight:600;color:var(--accent);background:none;border:none;font-family:inherit;cursor:pointer;padding:4px 0;letter-spacing:0.2px}
+.shop-cat-hd{font-size:9px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--text-dim);opacity:0.5;padding:8px 0 4px}
+.shop-item{display:flex;align-items:center;gap:12px;background:var(--card-bg);border:0.5px solid rgba(29,28,22,0.15);border-radius:12px;padding:13px 14px;margin-bottom:6px;cursor:pointer;transition:all 0.15s;-webkit-user-select:none;user-select:none;min-height:56px}
+.shop-item:active{background:var(--surface-hover);transform:scale(0.98)}
+.shop-item.shop-checked{border-color:rgba(201,100,66,0.3);background:var(--accent-light);opacity:0.65}
+.shop-cb{width:22px;height:22px;border:2px solid var(--border);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.shop-checked .shop-cb{background:var(--accent);border-color:var(--accent)}
+.shop-checked .shop-cb::after{content:'✓';color:#fff;font-size:12px;font-weight:700}
+.shop-info{flex:1;min-width:0}
+.shop-name{font-size:14px;font-weight:600;color:var(--text);line-height:1.2}
+.shop-qty{font-size:12px;color:var(--accent);font-weight:700;margin-left:5px}
+.shop-unit{font-size:11px;color:var(--text-dim);margin-top:2px}
+.carb-scaled{color:var(--accent);font-weight:700;margin-left:3px;font-size:10px}
+.shop-prices{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.shop-price-pair{display:flex;align-items:center;gap:3px}
+.store-lbl{font-size:9px;font-weight:700;letter-spacing:0.3px;width:14px;text-align:center;flex-shrink:0}
+.lbl-aldi{color:#003882}
+.lbl-tesco{color:#cc0000}
+.price-in{width:50px;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 4px;font-size:13px;font-family:inherit;color:var(--text);text-align:center;outline:none;-webkit-appearance:none;appearance:none}
+.price-in:focus{border-color:var(--accent)}
+.shop-best{font-size:8px;font-weight:700;letter-spacing:0.5px;padding:2px 7px;border-radius:5px;text-transform:uppercase;flex-shrink:0}
+.best-aldi{background:#e8edf5;color:#003882}
+.best-tesco{background:#fde8e8;color:#cc0000}
+.cr-card{background:var(--text);color:var(--bg);border-radius:14px;padding:18px;margin:14px 0 10px;text-align:center}
+.cr-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;opacity:0.6;margin-bottom:10px}
+.cr-stores{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:8px}
+.cr-store{flex:1}
+.cr-store-name{font-size:11px;font-weight:600;letter-spacing:0.3px;opacity:0.6;margin-bottom:2px}
+.cr-total{font-size:22px;font-weight:700;font-family:'Space Mono','Courier New',monospace;opacity:0.7}
+.cr-winner .cr-total{opacity:1;color:#CDFF00}
+.cr-vs{font-size:11px;opacity:0.35;flex-shrink:0}
+.cr-mixed{font-size:12px;opacity:0.65;margin-top:4px}
+.cr-hint{font-size:11px;color:var(--text-dim);text-align:center;padding:14px;opacity:0.7}
+.btn-ghost{background:none;border:1px solid var(--border);color:var(--text-dim);border-radius:10px;padding:12px 20px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;width:100%;transition:all 0.15s;letter-spacing:0.2px;margin-top:4px}
+.btn-ghost:active{background:var(--surface-hover);color:var(--text)}
+@media(max-width:480px){#fuel-module{padding:0 16px 32px}}
 </style>
 </head>
 <body>
 <div class="container" id="app"></div>
+<div id="fuel-module"></div>
 <div class="toast" id="toast"></div>
 <script>
 // ─── Training Plan Data ───────────────────────────────────────────────
@@ -329,10 +400,10 @@ function renderStatusBadge(){
   if(s.hr_at_mp)pills.push(`MP heart rate ~${Math.round(s.hr_at_mp)}bpm`);
   el.className=`status-card ${cls}`;
   el.innerHTML=`
-    <div class="status-eyebrow">Live Training Status &middot; Wk ${s.current_week||'?'}</div>
+    <div class="status-eyebrow">Training Status &middot; Wk ${s.current_week||'?'}</div>
     <div class="status-headline">${s.label||'Calculating...'}</div>
     <div class="status-pills">${pills.map(p=>`<span class="status-pill">${p}</span>`).join('')}</div>
-    <div class="status-updated">Updated ${s.last_updated||'—'} &middot; based on 1:13 HM PB + AE trend</div>`;
+    <div class="status-updated">Synced ${s.last_updated||'—'}</div>`;
 }
 
 // ─── State ────────────────────────────────────────────────────────────
@@ -398,11 +469,6 @@ function render(){
   <div class="subtitle">Blackpool Marathon</div>
   <div class="last-synced" id="last-synced"></div>
 </header>
-
-<div id="status-badge" class="status-card on-track">
-  <div class="status-eyebrow">Live Training Status</div>
-  <div class="status-headline">Loading...</div>
-</div>
 
 <div class="countdown-card">
   <span class="countdown-label">Race Day</span>
@@ -477,10 +543,16 @@ function render(){
   </div>
   <div class="form-group" style="margin-bottom:16px"><label>Notes (optional)</label><textarea id="log-notes" placeholder="How did it feel?"></textarea></div>
   <button class="btn" onclick="saveLog()">Save Workout</button>
+</div>
+
+<div id="status-badge" class="status-card">
+  <div class="status-eyebrow">Training Status</div>
+  <div class="status-headline">Loading...</div>
 </div>`;
 
   document.getElementById('app').innerHTML=html;
   updateDayOpts();
+  renderFuelModule();
 }
 
 function updateDayOpts(){
@@ -557,6 +629,261 @@ document.addEventListener('touchend',e=>{
     else if(dx>0&&currentWeek>1)navWeek(-1);
   }
 },{passive:true});
+
+// ─── Fuel & Shop ──────────────────────────────────────────────────────
+const STAPLES=[
+  // id, name, unit, base qty, category, macros per unit {c,p,f} in grams, scalable (carb items)
+  {id:'oats',      name:'Oats',            unit:'500g bag',    qty:2,cat:'carb',   macros:{c:320,p:52,f:28}, scalable:true},
+  {id:'pasta',     name:'Pasta',           unit:'500g bag',    qty:2,cat:'carb',   macros:{c:370,p:63,f:7},  scalable:true},
+  {id:'rice',      name:'Rice',            unit:'1kg bag',     qty:1,cat:'carb',   macros:{c:780,p:60,f:7},  scalable:true},
+  {id:'banana',    name:'Bananas',         unit:'bunch of 6',  qty:2,cat:'carb',   macros:{c:140,p:8, f:1},  scalable:true},
+  {id:'sweetpot',  name:'Sweet Potatoes',  unit:'1kg bag',     qty:1,cat:'carb',   macros:{c:175,p:10,f:1},  scalable:true},
+  {id:'bread',     name:'Wholegrain Bread',unit:'800g loaf',   qty:1,cat:'carb',   macros:{c:360,p:52,f:18}, scalable:true},
+  {id:'chicken',   name:'Chicken Breast',  unit:'1kg pack',    qty:2,cat:'protein',macros:{c:0,  p:310,f:35},scalable:false},
+  {id:'eggs',      name:'Eggs',            unit:'dozen (12)',  qty:2,cat:'protein',macros:{c:5,  p:84, f:60},scalable:false},
+  {id:'salmon',    name:'Salmon Fillets',  unit:'400g pack',   qty:1,cat:'protein',macros:{c:0,  p:80, f:44},scalable:false},
+  {id:'greek_yog', name:'Greek Yogurt',    unit:'500g pot',    qty:2,cat:'protein',macros:{c:24, p:58, f:8}, scalable:false},
+  {id:'milk',      name:'Whole Milk',      unit:'2L bottle',   qty:2,cat:'protein',macros:{c:90, p:62, f:72},scalable:false},
+  {id:'peanut',    name:'Peanut Butter',   unit:'340g jar',    qty:1,cat:'fat',    macros:{c:45, p:70, f:170},scalable:false},
+  {id:'almonds',   name:'Almonds',         unit:'200g bag',    qty:1,cat:'fat',    macros:{c:22, p:42, f:100},scalable:false},
+  {id:'olive_oil', name:'Olive Oil',       unit:'500ml bottle',qty:1,cat:'fat',    macros:{c:0,  p:0,  f:450},scalable:false},
+  {id:'spinach',   name:'Spinach',         unit:'200g bag',    qty:2,cat:'veg',    macros:{c:5,  p:5,  f:0},  scalable:false},
+  {id:'broccoli',  name:'Broccoli',        unit:'400g head',   qty:2,cat:'veg',    macros:{c:16, p:12, f:0},  scalable:false},
+];
+
+function getFuel(){
+  if(!state.fuel)state.fuel={weight:65,prices:{aldi:{},tesco:{}},shopChecked:{},open:true,showPrices:true};
+  const f=state.fuel;
+  if(!f.prices){f.prices={aldi:{},tesco:{}};}
+  if(!f.prices.aldi)f.prices.aldi={};
+  if(!f.prices.tesco)f.prices.tesco={};
+  if(!f.shopChecked)f.shopChecked={};
+  if(f.showPrices===undefined)f.showPrices=true;
+  return f;
+}
+
+function calcWeekFuel(weekNum){
+  const f=getFuel();
+  const w=PLAN[weekNum-1];
+  const wkg=Math.max(40,Math.min(120,parseFloat(f.weight)||65));
+  const totalKm=DAYS.reduce((s,d)=>s+parseKm(w.days[d]),0);
+  // Net caloric cost of running ≈ 1.04 kcal/kg/km (ACSM standard)
+  const runCals=Math.round(totalKm*wkg*1.04);
+  // Simplified BMR (male, ~28yr, 178cm) with sedentary base multiplier 1.3
+  const bmr=Math.round(88.4+(13.4*wkg)+(4.8*178)-(5.7*28));
+  const weekCals=Math.round(bmr*7*1.3+runCals);
+  const dailyCals=Math.round(weekCals/7);
+  // Macro targets: ACSM endurance athlete guidelines
+  const carbFactor=totalKm>80?9:7; // g/kg/day; 9g on high-volume weeks
+  const carbs=Math.round(wkg*carbFactor);
+  const protein=Math.round(wkg*1.7);
+  const fat=Math.round(wkg*1.4);
+  return{totalKm,runCals,weekCals,dailyCals,carbs,protein,fat,highMileage:totalKm>80,wkg};
+}
+
+function getItemQty(item,highMileage){
+  if(item.scalable&&highMileage)return Math.ceil(item.qty*1.2);
+  return item.qty;
+}
+
+function calcFuelCosts(){
+  const f=getFuel();
+  const{highMileage}=calcWeekFuel(currentWeek);
+  let aldiTotal=0,tescoTotal=0,mixedTotal=0;
+  const bestStore={};
+  STAPLES.forEach(item=>{
+    const qty=getItemQty(item,highMileage);
+    const ap=(parseFloat(f.prices.aldi[item.id])||0)*qty;
+    const tp=(parseFloat(f.prices.tesco[item.id])||0)*qty;
+    aldiTotal+=ap;tescoTotal+=tp;
+    if(ap>0&&tp>0){
+      mixedTotal+=Math.min(ap,tp);
+      bestStore[item.id]=ap<=tp?'aldi':'tesco';
+    }else if(ap>0){mixedTotal+=ap;bestStore[item.id]='aldi';}
+    else if(tp>0){mixedTotal+=tp;bestStore[item.id]='tesco';}
+    else bestStore[item.id]=null;
+  });
+  const hasPrices=aldiTotal>0||tescoTotal>0;
+  const savings=Math.max(aldiTotal,tescoTotal)-mixedTotal;
+  return{aldiTotal,tescoTotal,mixedTotal,bestStore,hasPrices,savings};
+}
+
+function toggleFuelOpen(){
+  const f=getFuel();f.open=!f.open;saveState();renderFuelModule();
+}
+function toggleFuelPrices(){
+  const f=getFuel();f.showPrices=!f.showPrices;saveState();renderFuelModule();
+}
+function toggleShopItem(id){
+  const f=getFuel();
+  f.shopChecked[id]=!f.shopChecked[id];
+  if(!f.shopChecked[id])delete f.shopChecked[id];
+  saveState();renderFuelModule();
+}
+function setFuelWeight(v){
+  const f=getFuel();f.weight=Math.max(40,Math.min(120,parseFloat(v)||65));saveState();renderFuelModule();
+}
+function setFuelPrice(id,store,v){
+  const f=getFuel();
+  const val=parseFloat(v);
+  if(val>0)f.prices[store][id]=Math.round(val*100)/100;
+  else delete f.prices[store][id];
+  saveState();renderFuelModule();
+}
+function resetShopList(){
+  const f=getFuel();f.shopChecked={};saveState();renderFuelModule();showToast('Checklist cleared!');
+}
+
+function renderFuelModule(){
+  const el=document.getElementById('fuel-module');
+  if(!el)return;
+  const f=getFuel();
+  const fuel=calcWeekFuel(currentWeek);
+  const costs=calcFuelCosts();
+  const CAT_ORDER=['carb','protein','fat','veg'];
+  const CAT_LABELS={carb:'Carbs',protein:'Protein',fat:'Fats',veg:'Veg & Greens'};
+  const maxMacro=Math.max(fuel.carbs,fuel.protein,fuel.fat);
+  const checkedCount=Object.values(f.shopChecked).filter(Boolean).length;
+  const totalItems=STAPLES.length;
+
+  // Build shopping list HTML
+  let shopHtml='';
+  CAT_ORDER.forEach(cat=>{
+    const items=STAPLES.filter(s=>s.cat===cat);
+    shopHtml+=`<div class="shop-cat-hd">${CAT_LABELS[cat]}</div>`;
+    items.forEach(item=>{
+      const checked=!!f.shopChecked[item.id];
+      const qty=getItemQty(item,fuel.highMileage);
+      const best=costs.bestStore[item.id];
+      const ap=parseFloat(f.prices.aldi[item.id])||0;
+      const tp=parseFloat(f.prices.tesco[item.id])||0;
+      const bestBadge=best?`<span class="shop-best best-${best}">${best==='aldi'?'ALDI':'TESCO'}</span>`:'';
+
+      let pricesHtml='';
+      if(f.showPrices){
+        pricesHtml=`<div class="shop-prices" onclick="event.stopPropagation()">
+          <div class="shop-price-pair">
+            <span class="store-lbl lbl-aldi">A</span>
+            <input type="number" class="price-in" step="0.01" min="0" placeholder="–" value="${ap||''}" onblur="setFuelPrice('${item.id}','aldi',this.value)">
+          </div>
+          <div class="shop-price-pair">
+            <span class="store-lbl lbl-tesco">T</span>
+            <input type="number" class="price-in" step="0.01" min="0" placeholder="–" value="${tp||''}" onblur="setFuelPrice('${item.id}','tesco',this.value)">
+          </div>
+          ${bestBadge}
+        </div>`;
+      } else if(best){
+        pricesHtml=`<div class="shop-prices"><span class="shop-best best-${best}">${best==='aldi'?'ALDI':'TESCO'}</span></div>`;
+      }
+
+      shopHtml+=`<div class="shop-item${checked?' shop-checked':''}" onclick="toggleShopItem('${item.id}')">
+        <div class="shop-cb"></div>
+        <div class="shop-info">
+          <div class="shop-name">${escHtml(item.name)}<span class="shop-qty">×${qty}</span></div>
+          <div class="shop-unit">${escHtml(item.unit)}${item.scalable&&fuel.highMileage?'<span class="carb-scaled">+20%</span>':''}</div>
+        </div>
+        ${pricesHtml}
+      </div>`;
+    });
+  });
+
+  // Cheapest route card
+  let crHtml='';
+  if(costs.hasPrices){
+    const aldiWins=costs.aldiTotal>0&&(costs.tescoTotal===0||costs.aldiTotal<=costs.tescoTotal);
+    const tescoWins=costs.tescoTotal>0&&(costs.aldiTotal===0||costs.tescoTotal<costs.aldiTotal);
+    crHtml=`<div class="cr-card">
+      <div class="cr-eyebrow">Cheapest Route</div>
+      <div class="cr-stores">
+        <div class="cr-store${aldiWins?' cr-winner':''}">
+          <div class="cr-store-name">ALDI</div>
+          <div class="cr-total">${costs.aldiTotal>0?'£'+costs.aldiTotal.toFixed(2):'—'}</div>
+        </div>
+        <div class="cr-vs">vs</div>
+        <div class="cr-store${tescoWins?' cr-winner':''}">
+          <div class="cr-store-name">TESCO</div>
+          <div class="cr-total">${costs.tescoTotal>0?'£'+costs.tescoTotal.toFixed(2):'—'}</div>
+        </div>
+      </div>
+      ${costs.savings>0.009?`<div class="cr-mixed">Mixed shopping saves £${costs.savings.toFixed(2)}</div>`:''}
+    </div>`;
+  } else {
+    crHtml=`<div class="cr-hint">Enter prices above to unlock cheapest route comparison</div>`;
+  }
+
+  const innerHtml=f.open?`<div class="fuel-content">
+    <!-- Calorie estimate -->
+    <div class="fuel-est-card">
+      <div class="fuel-est-header">
+        <span class="fuel-est-title">Week ${currentWeek} Fuel Estimate</span>
+        <span class="fuel-est-km">${fuel.totalKm}km</span>
+      </div>
+      <div class="fuel-stats">
+        <div class="fuel-stat">
+          <div class="fuel-stat-val">${fuel.weekCals.toLocaleString()}</div>
+          <div class="fuel-stat-label">kcal / week</div>
+        </div>
+        <div class="fuel-stat">
+          <div class="fuel-stat-val">${fuel.dailyCals.toLocaleString()}</div>
+          <div class="fuel-stat-label">kcal / day</div>
+        </div>
+        <div class="fuel-stat">
+          <div class="fuel-stat-val">${fuel.runCals.toLocaleString()}</div>
+          <div class="fuel-stat-label">run burn</div>
+        </div>
+      </div>
+      <div class="fuel-weight-row">
+        <label>Athlete weight</label>
+        <input type="number" class="fuel-weight-in" value="${f.weight}" min="40" max="120" onblur="setFuelWeight(this.value)">
+        <span class="fuel-weight-unit">kg</span>
+      </div>
+    </div>
+
+    <!-- Macro targets -->
+    <div class="macro-section">
+      <div class="macro-row">
+        <span class="macro-name">Carbs</span>
+        <span class="macro-g">${fuel.carbs}g</span>
+        <div class="macro-bar-wrap"><div class="macro-bar-fill carb-fill" style="width:100%"></div></div>
+        <span class="macro-per">/day</span>
+      </div>
+      <div class="macro-row">
+        <span class="macro-name">Protein</span>
+        <span class="macro-g">${fuel.protein}g</span>
+        <div class="macro-bar-wrap"><div class="macro-bar-fill protein-fill" style="width:${Math.round(fuel.protein/fuel.carbs*100)}%"></div></div>
+        <span class="macro-per">/day</span>
+      </div>
+      <div class="macro-row">
+        <span class="macro-name">Fat</span>
+        <span class="macro-g">${fuel.fat}g</span>
+        <div class="macro-bar-wrap"><div class="macro-bar-fill fat-fill" style="width:${Math.round(fuel.fat/fuel.carbs*100)}%"></div></div>
+        <span class="macro-per">/day</span>
+      </div>
+    </div>
+
+    ${fuel.highMileage?'<div class="high-mi-badge">⚡ High mileage week (>80km) — carb quantities scaled +20%</div>':''}
+
+    <!-- Shopping list -->
+    <div class="shop-section-top">
+      <span class="shop-section-hd">Shopping Checklist</span>
+      <button class="shop-prices-toggle" onclick="event.stopPropagation();toggleFuelPrices()">${f.showPrices?'Hide prices':'Show prices'}</button>
+    </div>
+    ${shopHtml}
+    ${crHtml}
+    <button class="btn-ghost" onclick="resetShopList()">Reset checklist</button>
+  </div>`:'';
+
+  el.innerHTML=`<div class="fuel-module${f.open?' fuel-module-open':''}">
+    <button class="fuel-toggle" onclick="toggleFuelOpen()">
+      <span>Fuel &amp; Shop</span>
+      <div class="fuel-toggle-right">
+        ${checkedCount>0?`<span class="fuel-progress-badge">${checkedCount}/${totalItems}</span>`:''}
+        <span class="fuel-icon">▾</span>
+      </div>
+    </button>
+    ${innerHtml}
+  </div>`;
+}
 
 // ─── Init ─────────────────────────────────────────────────────────────
 loadState();
