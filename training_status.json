@@ -14,18 +14,18 @@
   "red_zone_hr": 178.2,
   "current_week": 18,
   "week9_km": 104.8,
-  "last_updated": "2026-08-03",
-  "ctl": 31.4,
-  "atl": 29.1,
-  "tsb": 2.2,
+  "last_updated": "2026-08-07",
+  "ctl": 31.9,
+  "atl": 31.1,
+  "tsb": 0.8,
   "form": "recovering",
   "vdot": 67.6,
   "vdot_from": "2026-07-19",
   "zone_pct": {
-    "z1": 17,
+    "z1": 16,
     "z2": 49,
     "z3": 23,
     "z4": 9,
-    "z5": 3
+    "z5": 2
   }
 }
